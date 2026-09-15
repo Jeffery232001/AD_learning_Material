@@ -878,6 +878,7 @@ function Badge({ label, color = T.green, bg = T.greenBg }) {
     </span>
   );
 }
+// eslint-disable-next-line no-unused-vars
 function StatusBadge({ enabled, locked, pwdExpired, mustChangePwd }) {
   if (locked) return <Badge label="Locked" bg={T.redBg} color={T.red} />;
   if (!enabled) return <Badge label="Disabled" bg="#ececec" color="#666" />;
@@ -2280,6 +2281,7 @@ const Ico = {
 // ════════════════════════════════════════════════════════
 // DASHBOARD
 // ════════════════════════════════════════════════════════
+// eslint-disable-next-line no-unused-vars
 function Dashboard({ state }) {
   const stats = [
     {
@@ -3670,10 +3672,9 @@ function NewComputerForm({ state, dispatch, logEvent, defaultOU, onClose }) {
       </Field>
       <Field label="Computer name (pre-Windows 2000):">
         <input
-          style={S.input}
+          style={{ ...S.input, background: "#f5f5f5" }}
           value={form.name}
           readOnly
-          style={{ ...S.input, background: "#f5f5f5" }}
         />
       </Field>
       <Field label="Operating System:">
