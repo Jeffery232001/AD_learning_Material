@@ -5025,6 +5025,7 @@ function ServerManagerDashboard({ state, setTool }) {
           WELCOME TO SERVER MANAGER
         </div>
         <div
+          className="server-manager-welcome-layout"
           style={{
             display: "grid",
             gridTemplateColumns: "200px 1fr",
@@ -5197,6 +5198,7 @@ function ServerManagerDashboard({ state, setTool }) {
           Servers total: {state.domainControllers.length}
         </div>
         <div
+          className="server-manager-roles-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4,1fr)",
@@ -5606,6 +5608,7 @@ export default function App() {
     >
       {/* ── Top bar  (matches Image 2 exactly) ── */}
       <div
+        className="server-manager-topbar"
         style={{
           background: "#1e1e1e",
           height: 42,
@@ -5649,6 +5652,7 @@ export default function App() {
         </div>
         {/* Breadcrumb */}
         <div
+          className="server-manager-breadcrumb"
           style={{
             padding: "0 16px",
             display: "flex",
@@ -5770,9 +5774,13 @@ export default function App() {
         </div>
       </div>
 
-      <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
+      <div
+        className="server-manager-body"
+        style={{ display: "flex", flex: 1, overflow: "hidden" }}
+      >
         {/* ── Left sidebar (matches Image 2 dark nav) ── */}
         <div
+          className="server-manager-sidebar"
           style={{
             width: 200,
             background: "#2d2d2d",
@@ -5910,6 +5918,7 @@ export default function App() {
 
         {/* ── Main content area ── */}
         <div
+          className="server-manager-main"
           style={{
             flex: 1,
             overflow: "auto",

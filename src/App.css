@@ -36,3 +36,58 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 767px) {
+  .server-manager-topbar {
+    height: auto !important;
+    min-height: 42px;
+    flex-wrap: wrap;
+  }
+
+  .server-manager-breadcrumb {
+    min-width: 0;
+    flex: 1 1 220px !important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 8px !important;
+  }
+
+  .server-manager-breadcrumb span {
+    flex-shrink: 0;
+  }
+
+  .server-manager-breadcrumb span:last-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .server-manager-body {
+    flex-direction: column !important;
+    overflow: visible !important;
+  }
+
+  .server-manager-sidebar {
+    width: 100% !important;
+    max-height: none;
+    flex: 0 0 auto !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid #111;
+  }
+
+  .server-manager-main {
+    min-width: 0;
+    width: 100%;
+    overflow: visible !important;
+  }
+
+  .server-manager-welcome-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .server-manager-roles-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
