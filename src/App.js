@@ -1,10 +1,12 @@
 import Active from './components/Active';
 import './App.css';
+import logo from './logo/logo.png';
 
 function App() {
   return (
     <div className="App">
-      <h1>Welcome to Active Directory clone Asset App</h1>
+      <img src={logo} alt="ADLapp" />
+      <h1>ADLapp</h1>
       <Active />
     </div>
   );
