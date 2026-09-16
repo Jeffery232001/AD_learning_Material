@@ -5005,11 +5005,26 @@ function ServerManagerDashboard({ state, setTool }) {
           padding: "18px 24px 14px",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-          <img src={logo} alt="ADlapp logo" style={{ width: 72, height: 72, objectFit: "contain" }} />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            marginBottom: 14,
+          }}
+        >
+          <img
+            src={logo}
+            alt="ADlapp logo"
+            style={{ width: 72, height: 72, objectFit: "contain" }}
+          />
           <div>
-            <div style={{ color: T.navy, fontSize: 22, fontWeight: 800 }}>ADlapp</div>
-            <div style={{ color: T.textSub, fontSize: 12 }}>Active Directory Learning App</div>
+            <div style={{ color: T.navy, fontSize: 22, fontWeight: 800 }}>
+              ADlapp
+            </div>
+            <div style={{ color: T.textSub, fontSize: 12 }}>
+              Active Directory Learning App
+            </div>
           </div>
         </div>
         <div
@@ -5661,8 +5676,14 @@ export default function App() {
             flex: 1,
           }}
         >
-          <img src={logo} alt="ADlapp logo" style={{ width: 28, height: 28, objectFit: "contain" }} />
-          <span style={{ color: "#fff", fontWeight: 800, fontSize: 15 }}>ADlapp</span>
+          <img
+            src={logo}
+            alt="ADlapp logo"
+            style={{ width: 28, height: 28, objectFit: "contain" }}
+          />
+          <span style={{ color: "#fff", fontWeight: 800, fontSize: 15 }}>
+            ADlapp
+          </span>
           <span style={{ color: "#666", fontSize: 14 }}>▶</span>
           <span style={{ color: "#fff", fontWeight: 700, fontSize: 15 }}>
             Server Manager
