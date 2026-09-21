@@ -38,6 +38,24 @@
 }
 
 @media (max-width: 767px) {
+  .server-page-grid,
+  .detail-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .property-grid,
+  .server-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
   .server-manager-topbar {
     height: auto !important;
     min-height: 42px;

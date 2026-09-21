@@ -1,5 +1,6 @@
 import { useState, useReducer, useCallback, useRef, useEffect } from "react";
 import logo from "../logo/logo.png";
+import { loadServers, saveServers } from "../serverData";
 
 // ════════════════════════════════════════════════════════
 // DOMAIN CONFIG
@@ -302,6 +303,300 @@ const initialState = {
       department: "HR",
       description: "",
     },
+    {
+      id: "u-7",
+      firstName: "Yaw",
+      lastName: "Owusu",
+      username: "y.owusu",
+      email: `y.owusu@${DOMAIN}`,
+      ou: "ou-it",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-09 09:02",
+      groups: ["g-it"],
+      phone: "+233 24 000 0007",
+      title: "Systems Engineer",
+      department: "IT",
+      description: "Windows and Linux systems engineer",
+    },
+    {
+      id: "u-8",
+      firstName: "Nana",
+      lastName: "Adjei",
+      username: "n.adjei",
+      email: `n.adjei@${DOMAIN}`,
+      ou: "ou-it",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-09 08:18",
+      groups: ["g-it"],
+      phone: "+233 24 000 0008",
+      title: "Network Administrator",
+      department: "IT",
+      description: "Network operations administrator",
+    },
+    {
+      id: "u-9",
+      firstName: "Adwoa",
+      lastName: "Frimpong",
+      username: "a.frimpong",
+      email: `a.frimpong@${DOMAIN}`,
+      ou: "ou-hr",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-09 08:52",
+      groups: ["g-hr"],
+      phone: "+233 24 000 0009",
+      title: "Recruitment Officer",
+      department: "HR",
+      description: "Recruitment and onboarding",
+    },
+    {
+      id: "u-10",
+      firstName: "Kojo",
+      lastName: "Asare",
+      username: "k.asare",
+      email: `k.asare@${DOMAIN}`,
+      ou: "ou-hr",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-09 07:45",
+      groups: ["g-hr"],
+      phone: "+233 24 000 0010",
+      title: "People Operations Lead",
+      department: "HR",
+      description: "People operations and benefits",
+    },
+    {
+      id: "u-11",
+      firstName: "Akosua",
+      lastName: "Badu",
+      username: "a.badu",
+      email: `a.badu@${DOMAIN}`,
+      ou: "ou-finance",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-09 09:20",
+      groups: ["g-finance"],
+      phone: "+233 24 000 0011",
+      title: "Senior Accountant",
+      department: "Finance",
+      description: "General ledger and reporting",
+    },
+    {
+      id: "u-12",
+      firstName: "Fiifi",
+      lastName: "Quaye",
+      username: "f.quaye",
+      email: `f.quaye@${DOMAIN}`,
+      ou: "ou-finance",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-09 08:05",
+      groups: ["g-finance"],
+      phone: "+233 24 000 0012",
+      title: "Accounts Payable Analyst",
+      department: "Finance",
+      description: "Supplier payments and reconciliation",
+    },
+    {
+      id: "u-13",
+      firstName: "Mawuli",
+      lastName: "Klu",
+      username: "m.klu",
+      email: `m.klu@${DOMAIN}`,
+      ou: "ou-finance",
+      enabled: false,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: true,
+      pwdExpired: false,
+      disabled: true,
+      lastLogon: "2025-05-28 16:10",
+      groups: ["g-finance"],
+      phone: "+233 24 000 0013",
+      title: "Finance Intern",
+      department: "Finance",
+      description: "Temporary account disabled pending review",
+    },
+    {
+      id: "u-14",
+      firstName: "Selina",
+      lastName: "Amoah",
+      username: "s.amoah",
+      email: `s.amoah@${DOMAIN}`,
+      ou: "cn-users",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-09 08:33",
+      groups: ["g-domusers"],
+      phone: "+233 24 000 0014",
+      title: "Project Coordinator",
+      department: "Operations",
+      description: "Corporate project coordination",
+    },
+    {
+      id: "u-15",
+      firstName: "Richmond",
+      lastName: "Tetteh",
+      username: "r.tetteh",
+      email: `r.tetteh@${DOMAIN}`,
+      ou: "cn-users",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-09 08:49",
+      groups: ["g-domusers"],
+      phone: "+233 24 000 0015",
+      title: "Operations Analyst",
+      department: "Operations",
+      description: "Business operations analyst",
+    },
+    {
+      id: "u-16",
+      firstName: "Esi",
+      lastName: "Agyeman",
+      username: "e.agyeman",
+      email: `e.agyeman@${DOMAIN}`,
+      ou: "cn-users",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-09 07:58",
+      groups: ["g-domusers"],
+      phone: "+233 24 000 0016",
+      title: "Customer Support Lead",
+      department: "Support",
+      description: "Customer support team lead",
+    },
+    {
+      id: "u-17",
+      firstName: "Kweku",
+      lastName: "Appiah",
+      username: "k.appiah",
+      email: `k.appiah@${DOMAIN}`,
+      ou: "cn-users",
+      enabled: true,
+      locked: true,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-08 18:20",
+      groups: ["g-domusers"],
+      phone: "+233 24 000 0017",
+      title: "Sales Executive",
+      department: "Sales",
+      description: "Account locked after repeated sign-in failures",
+    },
+    {
+      id: "u-18",
+      firstName: "Priscilla",
+      lastName: "Nartey",
+      username: "p.nartey",
+      email: `p.nartey@${DOMAIN}`,
+      ou: "cn-users",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: true,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-09 09:04",
+      groups: ["g-domusers"],
+      phone: "+233 24 000 0018",
+      title: "Marketing Specialist",
+      department: "Marketing",
+      description: "Marketing and communications",
+    },
+    {
+      id: "u-19",
+      firstName: "Emmanuel",
+      lastName: "Sarpong",
+      username: "e.sarpong",
+      email: `e.sarpong@${DOMAIN}`,
+      ou: "cn-users",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: true,
+      disabled: false,
+      lastLogon: "2025-06-01 12:30",
+      groups: ["g-domusers"],
+      phone: "+233 24 000 0019",
+      title: "Procurement Officer",
+      department: "Procurement",
+      description: "Password expired and requires reset",
+    },
+    {
+      id: "u-20",
+      firstName: "Linda",
+      lastName: "Ofori",
+      username: "l.ofori",
+      email: `l.ofori@${DOMAIN}`,
+      ou: "cn-users",
+      enabled: true,
+      locked: false,
+      pwdNeverExpires: false,
+      mustChangePwd: false,
+      cantChangePwd: false,
+      pwdExpired: false,
+      disabled: false,
+      lastLogon: "2025-06-09 08:12",
+      groups: ["g-domusers"],
+      phone: "+233 24 000 0020",
+      title: "Legal Assistant",
+      department: "Legal",
+      description: "Legal department assistant",
+    },
   ],
   computers: [
     {
@@ -363,6 +658,59 @@ const initialState = {
       status: "Inactive",
       lastLogon: "2025-05-15 12:00",
       description: "Print Server",
+    },
+    {
+      id: "c-5",
+      name: "WS-IT-LAB-01",
+      os: "Windows 11 Enterprise",
+      ip: "192.168.1.110",
+      ou: "cn-computers",
+      status: "Active",
+      lastLogon: "2025-06-09 09:12",
+      description: "IT training lab workstation",
+    },
+    {
+      id: "c-6",
+      name: "WS-RECEPTION-01",
+      os: "Windows 10 Enterprise",
+      ip: "192.168.1.111",
+      ou: "cn-computers",
+      status: "Active",
+      lastLogon: "2025-06-09 08:25",
+      description: "Reception desk workstation",
+    },
+    {
+      id: "c-7",
+      name: "WS-TRAINING-02",
+      os: "Windows 11 Pro",
+      ip: "192.168.1.112",
+      ou: "cn-computers",
+      status: "Inactive",
+      lastLogon: "2025-06-02 16:40",
+      description: "Shared classroom workstation",
+    },
+  ],
+  foreignSecurityPrincipals: [
+    {
+      id: "fsp-1",
+      name: "S-1-5-21-428913502-118203948-902134775-1107",
+      source: "PARTNER.LOCAL",
+      type: "Foreign Security Principal",
+      description: "External partner group referenced by a domain ACL",
+    },
+    {
+      id: "fsp-2",
+      name: "S-1-5-21-428913502-118203948-902134775-1134",
+      source: "RESEARCH.LOCAL",
+      type: "Foreign Security Principal",
+      description: "Research forest user retained for shared project access",
+    },
+    {
+      id: "fsp-3",
+      name: "S-1-5-32-544",
+      source: "BUILTIN",
+      type: "Foreign Security Principal",
+      description: "Well-known external administrator SID used by a trust",
     },
   ],
   groups: [
@@ -880,7 +1228,7 @@ function Badge({ label, color = T.green, bg = T.greenBg }) {
   );
 }
 // eslint-disable-next-line no-unused-vars
-function StatusBadge({ enabled, locked, pwdExpired, mustChangePwd }) {
+function ADStatusBadge({ enabled, locked, pwdExpired, mustChangePwd }) {
   if (locked) return <Badge label="Locked" bg={T.redBg} color={T.red} />;
   if (!enabled) return <Badge label="Disabled" bg="#ececec" color="#666" />;
   if (pwdExpired)
@@ -905,6 +1253,25 @@ function Field({ label, children, half }) {
         {label}
       </label>
       {children}
+    </div>
+  );
+}
+
+function ViewHint({ children }) {
+  return (
+    <div
+      style={{
+        background: "#e8f0fe",
+        border: `1px solid #c5dbf4`,
+        borderLeft: `3px solid ${T.blue2}`,
+        color: "#24415f",
+        padding: "8px 10px",
+        marginBottom: 12,
+        fontSize: 12,
+        lineHeight: 1.45,
+      }}
+    >
+      <strong style={{ color: T.navy }}>Learning note:</strong> {children}
     </div>
   );
 }
@@ -2522,7 +2889,7 @@ function Dashboard({ state }) {
 // ADUC — main USERS & COMPUTERS view  (left tree + right pane)
 // ════════════════════════════════════════════════════════
 function ADUCView({ state, dispatch, logEvent }) {
-  const [selectedNode, setSelectedNode] = useState(null); // OU id or null = root
+  const [selectedNode, setSelectedNode] = useState("cn-users"); // Start on the populated Users container.
   const [expandedNodes, setExpandedNodes] = useState(new Set(["root"]));
   const [search, setSearch] = useState("");
   const [ctxMenu, setCtxMenu] = useState(null); // { x, y, target, type }
@@ -2545,6 +2912,9 @@ function ADUCView({ state, dispatch, logEvent }) {
     const users = state.users.filter((u) => u.ou === nodeId);
     const comps = state.computers.filter((c) => c.ou === nodeId);
     const groups = state.groups.filter((g) => g.ou === nodeId);
+    const foreignPrincipals = (state.foreignSecurityPrincipals || []).filter(
+      (principal) => nodeId === "cn-fsp",
+    );
     const q = search.toLowerCase();
 
     const rows = [
@@ -2556,6 +2926,10 @@ function ADUCView({ state, dispatch, logEvent }) {
       })),
       ...comps.map((c) => ({ ...c, _type: "computer" })),
       ...groups.map((g) => ({ ...g, _type: "group" })),
+      ...foreignPrincipals.map((principal) => ({
+        ...principal,
+        _type: "foreignPrincipal",
+      })),
     ];
     if (!q) return rows;
     return rows.filter((r) => JSON.stringify(r).toLowerCase().includes(q));
@@ -2936,6 +3310,7 @@ function ADUCView({ state, dispatch, logEvent }) {
     if (item._type === "group")
       return `Security Group - ${item.scope || "Global"}`;
     if (item._type === "computer") return "Computer";
+    if (item._type === "foreignPrincipal") return "Foreign Security Principal";
     if (item._type === "ou") return "Organizational Unit";
     return "";
   };
@@ -2947,6 +3322,8 @@ function ADUCView({ state, dispatch, logEvent }) {
       return <span style={{ color: "#e65100" }}>{Ico.group}</span>;
     if (item._type === "computer")
       return <span style={{ color: T.purple }}>{Ico.computer}</span>;
+    if (item._type === "foreignPrincipal")
+      return <span style={{ color: T.amber }}>🔗</span>;
     if (item._type === "ou") return Ico.ou;
     return null;
   };
@@ -4112,6 +4489,11 @@ function GPOView({ state, dispatch, logEvent }) {
 
   return (
     <div>
+      <ViewHint>
+        Group Policy Objects apply centralized settings to users and computers.
+        Linking a GPO to an OU determines which directory objects inherit its
+        rules.
+      </ViewHint>
       <div
         style={{
           display: "flex",
@@ -4412,6 +4794,11 @@ function DNSView({ state }) {
       >
         DNS Manager — {DC_NAME}.{DOMAIN}
       </div>
+      <ViewHint>
+        DNS translates names such as <strong>{DOMAIN}</strong> into IP
+        addresses. Forward zones resolve names to addresses; reverse zones do
+        the opposite.
+      </ViewHint>
       <div
         style={{ display: "grid", gridTemplateColumns: "220px 1fr", gap: 12 }}
       >
@@ -4618,6 +5005,11 @@ function EventView({ state }) {
       }}
     >
       <div>
+        <ViewHint>
+          Select an event to inspect its source, ID, level, and message. In
+          production, this is where administrators begin investigating unusual
+          behavior.
+        </ViewHint>
         <div
           style={{
             display: "flex",
@@ -4847,6 +5239,10 @@ function DCView({ state }) {
       >
         Domain Controllers — {state.domain}
       </div>
+      <ViewHint>
+        Domain controllers authenticate users and replicate directory changes.
+        FSMO roles coordinate operations that must have a single authority.
+      </ViewHint>
       {state.domainControllers.map((dc) => (
         <div
           key={dc.name}
@@ -4956,6 +5352,245 @@ function DCView({ state }) {
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+function PrintServicesView() {
+  const [printers, setPrinters] = useState([
+    {
+      id: "prt-01",
+      name: "HR-Laser-01",
+      location: "HR Office",
+      driver: "HP Universal PCL 6",
+      status: "Ready",
+      jobs: 2,
+    },
+    {
+      id: "prt-02",
+      name: "Finance-Color-01",
+      location: "Finance Office",
+      driver: "Canon UFR II",
+      status: "Paused",
+      jobs: 0,
+    },
+    {
+      id: "prt-03",
+      name: "Reception-MFP",
+      location: "Front Desk",
+      driver: "Xerox Global Print",
+      status: "Ready",
+      jobs: 5,
+    },
+    {
+      id: "prt-04",
+      name: "IT-Plotter",
+      location: "IT Lab",
+      driver: "HP DesignJet Driver",
+      status: "Offline",
+      jobs: 0,
+    },
+  ]);
+  const [selected, setSelected] = useState("prt-01");
+  const selectedPrinter =
+    printers.find((printer) => printer.id === selected) || printers[0];
+  const togglePause = () =>
+    setPrinters((items) =>
+      items.map((printer) =>
+        printer.id === selected
+          ? {
+              ...printer,
+              status: printer.status === "Paused" ? "Ready" : "Paused",
+            }
+          : printer,
+      ),
+    );
+  const clearJobs = () =>
+    setPrinters((items) =>
+      items.map((printer) =>
+        printer.id === selected ? { ...printer, jobs: 0 } : printer,
+      ),
+    );
+  return (
+    <div style={{ padding: 16 }}>
+      <PageHeading
+        title="Print Services"
+        subtitle="Manage shared printers, queues, and print jobs"
+      >
+        <button
+          onClick={() =>
+            setPrinters((items) => [
+              ...items,
+              {
+                id: `prt-${Date.now()}`,
+                name: "New-Training-Printer",
+                location: "Training Room",
+                driver: "Microsoft IPP Class Driver",
+                status: "Ready",
+                jobs: 0,
+              },
+            ])
+          }
+          style={S.btnPrimary}
+        >
+          ＋ Add Printer
+        </button>
+      </PageHeading>
+      <ViewHint>
+        Print servers centralize queues and drivers so users can print without
+        installing hardware-specific software themselves.
+      </ViewHint>
+      <div
+        className="summary-grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 10,
+          marginBottom: 14,
+        }}
+      >
+        {[
+          ["Printers", printers.length, T.blue2],
+          [
+            "Ready",
+            printers.filter((printer) => printer.status === "Ready").length,
+            T.green,
+          ],
+          [
+            "Paused",
+            printers.filter((printer) => printer.status === "Paused").length,
+            T.amber,
+          ],
+          [
+            "Queued jobs",
+            printers.reduce((total, printer) => total + printer.jobs, 0),
+            T.purple,
+          ],
+        ].map(([label, value, color]) => (
+          <div key={label} style={summaryCard}>
+            <span style={{ color: T.textSub, fontSize: 12 }}>{label}</span>
+            <strong style={{ color, fontSize: 24 }}>{value}</strong>
+          </div>
+        ))}
+      </div>
+      <div
+        className="server-page-grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(220px, .7fr) minmax(0, 1.5fr)",
+          gap: 14,
+        }}
+      >
+        <Panel title="Printers">
+          <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+            {printers.map((printer) => (
+              <button
+                key={printer.id}
+                onClick={() => setSelected(printer.id)}
+                style={{
+                  textAlign: "left",
+                  padding: "9px 10px",
+                  border: `1px solid ${selected === printer.id ? T.blue2 : T.borderL}`,
+                  background: selected === printer.id ? "#e8f0fe" : "#fff",
+                  cursor: "pointer",
+                }}
+              >
+                <strong style={{ display: "block", color: T.navy }}>
+                  {printer.name}
+                </strong>
+                <span style={{ color: T.textSub, fontSize: 11 }}>
+                  {printer.location}
+                </span>
+                <span style={{ display: "block", marginTop: 5 }}>
+                  <Badge
+                    label={printer.status}
+                    bg={
+                      printer.status === "Ready"
+                        ? T.greenBg
+                        : printer.status === "Paused"
+                          ? T.amberBg
+                          : T.redBg
+                    }
+                    color={
+                      printer.status === "Ready"
+                        ? T.green
+                        : printer.status === "Paused"
+                          ? T.amber
+                          : T.red
+                    }
+                  />
+                </span>
+              </button>
+            ))}
+          </div>
+        </Panel>
+        <Panel title={selectedPrinter.name}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+              gap: 12,
+              marginBottom: 14,
+            }}
+          >
+            {[
+              ["Location", selectedPrinter.location],
+              ["Driver", selectedPrinter.driver],
+              ["Queue status", selectedPrinter.status],
+              ["Jobs waiting", selectedPrinter.jobs],
+            ].map(([label, value]) => (
+              <div key={label}>
+                <div style={detailLabel}>{label}</div>
+                <strong>{value}</strong>
+              </div>
+            ))}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              gap: 8,
+              flexWrap: "wrap",
+              marginBottom: 16,
+            }}
+          >
+            <button onClick={togglePause} style={S.btnSecondary}>
+              {selectedPrinter.status === "Paused"
+                ? "Resume queue"
+                : "Pause queue"}
+            </button>
+            <button onClick={clearJobs} style={S.btnSecondary}>
+              Clear completed jobs
+            </button>
+            <button
+              onClick={() =>
+                alert(
+                  `Printer properties for ${selectedPrinter.name} (simulated)`,
+                )
+              }
+              style={S.btnSecondary}
+            >
+              Properties
+            </button>
+          </div>
+          <div style={{ borderTop: `1px solid ${T.borderL}`, paddingTop: 12 }}>
+            <strong style={{ color: T.navy, fontSize: 13 }}>
+              Queue activity
+            </strong>
+            {selectedPrinter.jobs > 0 ? (
+              <div style={{ marginTop: 8, color: T.textSub, fontSize: 12 }}>
+                {selectedPrinter.jobs} simulated job
+                {selectedPrinter.jobs === 1 ? "" : "s"} waiting. A real
+                administrator would inspect document owner, size, and submission
+                time here.
+              </div>
+            ) : (
+              <div style={{ marginTop: 8, color: T.green, fontSize: 12 }}>
+                The queue is clear.
+              </div>
+            )}
+          </div>
+        </Panel>
+      </div>
     </div>
   );
 }
@@ -5334,9 +5969,995 @@ function ServerManagerDashboard({ state, setTool }) {
   );
 }
 
+function InfoTip({ text }) {
+  return (
+    <span
+      title={text}
+      style={{ color: T.blue2, cursor: "help", fontWeight: 800 }}
+    >
+      ⓘ
+    </span>
+  );
+}
+
+function ServerModal({ server, onSave, onClose }) {
+  const [draft, setDraft] = useState(
+    server || {
+      hostname: "APP02",
+      ip: "192.168.1.40",
+      type: "Application Server",
+      os: "Windows Server 2022",
+      environment: "Development",
+      location: "Accra HQ",
+      virtualization: "VM",
+      status: "Online",
+      owner: "John Addo",
+    },
+  );
+  const update = (key, value) =>
+    setDraft((current) => ({ ...current, [key]: value }));
+  return (
+    <div style={modalBackdrop}>
+      <div style={modalPanel}>
+        <div style={modalHeader}>
+          <strong>{server ? `Edit ${server.hostname}` : "Add Server"}</strong>
+          <button onClick={onClose} style={modalClose}>
+            ×
+          </button>
+        </div>
+        <div
+          className="server-form-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+            gap: 10,
+            padding: 16,
+          }}
+        >
+          {[
+            ["hostname", "Hostname"],
+            ["ip", "IP address"],
+            ["owner", "Assigned administrator"],
+          ].map(([key, label]) => (
+            <label key={key} style={formLabel}>
+              {label}
+              <input
+                value={draft[key] || ""}
+                onChange={(event) => update(key, event.target.value)}
+                style={formInput}
+              />
+            </label>
+          ))}
+          {[
+            [
+              "type",
+              "Server type",
+              [
+                "Domain Controller",
+                "DNS Server",
+                "File Server",
+                "Application Server",
+                "Web Server",
+                "SQL Database",
+                "Backup Server",
+                "Azure VM",
+              ],
+            ],
+            [
+              "os",
+              "Operating system",
+              [
+                "Windows Server 2022",
+                "Windows Server 2019",
+                "Ubuntu Server 24.04",
+                "VMware ESXi 8.0",
+              ],
+            ],
+            [
+              "environment",
+              "Environment",
+              ["Production", "Development", "Testing"],
+            ],
+            [
+              "location",
+              "Location",
+              ["Accra HQ", "Kumasi DR", "Cloud Lab", "Azure West Europe"],
+            ],
+            ["virtualization", "Virtualization", ["VM", "Physical"]],
+            [
+              "status",
+              "Status",
+              ["Online", "Warning", "Offline", "Maintenance"],
+            ],
+          ].map(([key, label, options]) => (
+            <label key={key} style={formLabel}>
+              {label}
+              <select
+                value={draft[key]}
+                onChange={(event) => update(key, event.target.value)}
+                style={formInput}
+              >
+                {options.map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
+              </select>
+            </label>
+          ))}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            gap: 8,
+            padding: "0 16px 16px",
+          }}
+        >
+          <button onClick={onClose} style={S.btnSecondary}>
+            Cancel
+          </button>
+          <button onClick={() => onSave(draft)} style={S.btnPrimary}>
+            Save server
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StatusBadge({ status }) {
+  const colors = {
+    Online: [T.green, T.greenBg],
+    Warning: [T.amber, T.amberBg],
+    Offline: [T.red, T.redBg],
+    Maintenance: [T.blue2, "#e8f0fe"],
+  };
+  const [color, bg] = colors[status] || [T.textSub, "#eee"];
+  return (
+    <span
+      style={{
+        background: bg,
+        color,
+        padding: "3px 7px",
+        borderRadius: 10,
+        fontSize: 11,
+        fontWeight: 700,
+      }}
+    >
+      <span style={{ marginRight: 4 }}>●</span>
+      {status}
+    </span>
+  );
+}
+
+function LocalServerView({ servers, updateServers }) {
+  const server = servers.find((item) => item.isLocal) || servers[0];
+  const [settings, setSettings] = useState(() => {
+    try {
+      return (
+        JSON.parse(
+          window.localStorage.getItem("adlapp-local-server-settings"),
+        ) || {
+          firewall: "On",
+          remoteManagement: "Enabled",
+          remoteDesktop: "Disabled",
+          ieSecurity: "On",
+          windowsUpdate: "Up to date",
+        }
+      );
+    } catch (error) {
+      return {
+        firewall: "On",
+        remoteManagement: "Enabled",
+        remoteDesktop: "Disabled",
+        ieSecurity: "On",
+        windowsUpdate: "Up to date",
+      };
+    }
+  });
+  const [editing, setEditing] = useState(null);
+  const [eventFilter, setEventFilter] = useState("All");
+  useEffect(() => {
+    window.localStorage.setItem(
+      "adlapp-local-server-settings",
+      JSON.stringify(settings),
+    );
+  }, [settings]);
+  const propertyRows = [
+    ["Computer name", server.hostname],
+    ["Domain", DOMAIN],
+    ["Windows Firewall", settings.firewall],
+    ["Remote management", settings.remoteManagement],
+    ["Remote Desktop", settings.remoteDesktop],
+    ["NIC Teaming", "Disabled"],
+    ["Ethernet / IP address", `Ethernet · ${server.ip}`],
+    ["Operating system", server.os],
+    ["Hardware", `${server.virtualization} · ${server.cpu} · ${server.ram}`],
+    ["Last installed update", "2026-09-12"],
+    ["Windows Update", settings.windowsUpdate],
+    ["Last checked for updates", "Today 08:30"],
+    ["IE Enhanced Security Configuration", settings.ieSecurity],
+    ["Time zone", "UTC+00:00 Accra"],
+    ["Product ID", "00329-80000-00000-AAOEM"],
+  ];
+  const toggleValue = (label) => {
+    const key =
+      label === "Windows Firewall"
+        ? "firewall"
+        : label === "Remote management"
+          ? "remoteManagement"
+          : label === "Remote Desktop"
+            ? "remoteDesktop"
+            : label === "IE Enhanced Security Configuration"
+              ? "ieSecurity"
+              : "windowsUpdate";
+    const values =
+      key === "windowsUpdate"
+        ? ["Up to date", "Updates available"]
+        : key === "remoteDesktop"
+          ? ["Disabled", "Enabled"]
+          : ["On", "Off"];
+    setSettings((current) => ({
+      ...current,
+      [key]: values[(values.indexOf(current[key]) + 1) % values.length],
+    }));
+    setEditing(null);
+  };
+  const events = (server.events || []).filter(
+    (event) => eventFilter === "All" || event.severity === eventFilter,
+  );
+  return (
+    <div style={pageStyle}>
+      <PageHeading
+        title="Local Server"
+        subtitle="Properties and status of this server"
+      />
+      <div
+        className="server-page-grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(0, 1.45fr) minmax(260px, .8fr)",
+          gap: 14,
+        }}
+      >
+        <Panel title={`${server.hostname} properties`}>
+          <div
+            className="property-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+            }}
+          >
+            {propertyRows.map(([label, value]) => (
+              <button
+                key={label}
+                onClick={() => setEditing(label)}
+                style={propertyButton}
+              >
+                <span>
+                  {label}
+                  {[
+                    "NIC Teaming",
+                    "Remote management",
+                    "IE Enhanced Security Configuration",
+                  ].includes(label) && (
+                    <InfoTip
+                      text={
+                        label === "NIC Teaming"
+                          ? "Combines network adapters for resilience and bandwidth."
+                          : label === "Remote management"
+                            ? "Lets administrators manage this server from another computer."
+                            : "Hardens Internet Explorer settings on a server to reduce browsing risk."
+                      }
+                    />
+                  )}
+                </span>
+                <strong
+                  style={{
+                    color: ["On", "Enabled", "Up to date"].includes(value)
+                      ? T.green
+                      : value === "Off" ||
+                          value === "Disabled" ||
+                          value === "Updates available"
+                        ? T.amber
+                        : T.text,
+                  }}
+                >
+                  {value}
+                </strong>
+              </button>
+            ))}
+          </div>
+        </Panel>
+        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          <Panel title="Performance">
+            <Metric label="CPU utilization" value={42} color={T.blue2} />
+            <Metric label="Memory utilization" value={68} color={T.orange} />
+            <Metric label="Storage utilization" value={54} color={T.green} />
+          </Panel>
+          <Panel title="Roles and Features">
+            <ul style={listStyle}>
+              {server.services.map((service) => (
+                <li key={service}>
+                  <span>{service}</span>
+                  <StatusBadge status="Online" />
+                </li>
+              ))}
+            </ul>
+          </Panel>
+        </div>
+      </div>
+      <div
+        className="server-page-grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(0, 1.2fr) minmax(260px, .8fr)",
+          gap: 14,
+          marginTop: 14,
+        }}
+      >
+        <Panel title="Recent system events">
+          <select
+            value={eventFilter}
+            onChange={(event) => setEventFilter(event.target.value)}
+            style={{ ...formInput, width: "auto", marginBottom: 8 }}
+          >
+            <option>All</option>
+            <option>Info</option>
+            <option>Warning</option>
+            <option>Error</option>
+          </select>
+          <EventTable events={events} />
+        </Panel>
+        <Panel title="Best Practices Analyzer">
+          <div style={{ color: T.amber, fontSize: 24, fontWeight: 800 }}>
+            3 issues found
+          </div>
+          {[
+            "Configure automatic updates",
+            "Review administrator membership",
+            "Enable backup verification",
+          ].map((issue) => (
+            <div
+              key={issue}
+              style={{
+                padding: "10px 0",
+                borderBottom: `1px solid ${T.borderL}`,
+                fontSize: 12,
+              }}
+            >
+              {issue}{" "}
+              <InfoTip text="This simulated recommendation helps reduce operational risk and improve recoverability." />
+            </div>
+          ))}
+        </Panel>
+      </div>
+      {editing && (
+        <div style={modalBackdrop}>
+          <div style={{ ...modalPanel, maxWidth: 360 }}>
+            <div style={modalHeader}>
+              <strong>{editing}</strong>
+              <button onClick={() => setEditing(null)} style={modalClose}>
+                ×
+              </button>
+            </div>
+            <p style={{ padding: "0 16px", color: T.textSub, fontSize: 13 }}>
+              This is a simulated setting for {server.hostname}. Changes affect
+              this learning session only.
+            </p>
+            <button
+              onClick={() => toggleValue(editing)}
+              style={{ ...S.btnPrimary, margin: "0 16px 16px" }}
+            >
+              Toggle value
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function AllServersView({ servers, updateServers, openDetails }) {
+  const [query, setQuery] = useState("");
+  const [filters, setFilters] = useState({
+    status: "All",
+    type: "All",
+    os: "All",
+    environment: "All",
+    location: "All",
+    virtualization: "All",
+  });
+  const [modal, setModal] = useState(null);
+  const options = (key) => [
+    "All",
+    ...new Set(servers.map((server) => server[key])),
+  ];
+  const filtered = servers.filter(
+    (server) =>
+      [server.hostname, server.ip, server.owner].some((value) =>
+        value.toLowerCase().includes(query.toLowerCase()),
+      ) &&
+      Object.entries(filters).every(
+        ([key, value]) => value === "All" || server[key] === value,
+      ),
+  );
+  const save = (draft) => {
+    const next = {
+      ...draft,
+      id: draft.id || `server-${Date.now()}`,
+      events: draft.events || [
+        { time: "Just now", event: "Server record created", severity: "Info" },
+      ],
+      services: draft.services || ["Server Management"],
+      cpu: draft.cpu || "4 vCPU",
+      ram: draft.ram || "16 GB",
+      storage: draft.storage || "250 GB",
+      uptime: draft.uptime || "0 days",
+      health: draft.health || "Healthy",
+      backup: draft.backup || "Not configured",
+    };
+    updateServers(
+      draft.id
+        ? servers.map((server) => (server.id === draft.id ? next : server))
+        : [...servers, next],
+    );
+    setModal(null);
+  };
+  return (
+    <div style={pageStyle}>
+      <PageHeading
+        title="All Servers"
+        subtitle="View and manage all servers across your infrastructure"
+      >
+        <button onClick={() => setModal({})} style={S.btnPrimary}>
+          ＋ Add Server
+        </button>
+      </PageHeading>
+      <div
+        className="summary-grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 10,
+          marginBottom: 14,
+        }}
+      >
+        {[
+          ["Total Servers", servers.length, T.blue2],
+          [
+            "Online",
+            servers.filter((s) => s.status === "Online").length,
+            T.green,
+          ],
+          [
+            "Warning",
+            servers.filter((s) => s.status === "Warning").length,
+            T.amber,
+          ],
+          [
+            "Offline",
+            servers.filter((s) => s.status === "Offline").length,
+            T.red,
+          ],
+        ].map(([label, value, color]) => (
+          <div key={label} style={summaryCard}>
+            <div style={{ color: T.textSub, fontSize: 12 }}>{label}</div>
+            <strong style={{ color, fontSize: 25 }}>{value}</strong>
+          </div>
+        ))}
+      </div>
+      <Panel>
+        <input
+          aria-label="Search servers"
+          placeholder="Search hostname, IP address, or owner"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          style={{
+            ...formInput,
+            width: "100%",
+            boxSizing: "border-box",
+            marginBottom: 10,
+          }}
+        />
+        <div
+          className="filter-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(6, minmax(100px, 1fr))",
+            gap: 7,
+            marginBottom: 12,
+          }}
+        >
+          {Object.entries(filters).map(([key, value]) => (
+            <select
+              key={key}
+              aria-label={key}
+              value={value}
+              onChange={(event) =>
+                setFilters((current) => ({
+                  ...current,
+                  [key]: event.target.value,
+                }))
+              }
+              style={formInput}
+            >
+              {options(key).map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+          ))}
+        </div>
+        <div style={{ overflowX: "auto" }}>
+          <table style={tableStyle}>
+            <thead>
+              <tr>
+                {[
+                  "Server",
+                  "IP Address",
+                  "Type",
+                  "OS",
+                  "Environment",
+                  "Location",
+                  "Status",
+                  "Actions",
+                ].map((heading) => (
+                  <th key={heading} style={thStyle}>
+                    {heading}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((server) => (
+                <tr
+                  key={server.id}
+                  onClick={() => openDetails(server.id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {[
+                    server.hostname,
+                    server.ip,
+                    server.type,
+                    server.os,
+                    server.environment,
+                    server.location,
+                  ].map((value) => (
+                    <td key={value} style={tdStyle}>
+                      {value}
+                    </td>
+                  ))}
+                  <td style={tdStyle}>
+                    <StatusBadge status={server.status} />
+                  </td>
+                  <td
+                    style={tdStyle}
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    <select
+                      aria-label={`Actions for ${server.hostname}`}
+                      value=""
+                      onChange={(event) => {
+                        if (event.target.value === "View")
+                          openDetails(server.id);
+                        if (event.target.value === "Edit") setModal(server);
+                        if (event.target.value === "Delete")
+                          updateServers(
+                            servers.filter((item) => item.id !== server.id),
+                          );
+                      }}
+                      style={{ ...formInput, width: 86 }}
+                    >
+                      <option value="">⋮</option>
+                      <option>View</option>
+                      <option>Edit</option>
+                      <option>Delete</option>
+                    </select>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {filtered.length === 0 && (
+            <div style={{ padding: 24, textAlign: "center", color: T.textSub }}>
+              No servers match the current search and filters.
+            </div>
+          )}
+        </div>
+      </Panel>
+      {modal && (
+        <ServerModal
+          server={modal.id ? modal : null}
+          onSave={save}
+          onClose={() => setModal(null)}
+        />
+      )}
+    </div>
+  );
+}
+
+function ServerDetailsView({ server, goBack }) {
+  return (
+    <div style={pageStyle}>
+      <PageHeading
+        title={`${server.hostname} details`}
+        subtitle="Simulated health and configuration record"
+      >
+        <button onClick={goBack} style={S.btnSecondary}>
+          ← All Servers
+        </button>
+      </PageHeading>
+      <Panel title="Server identity">
+        <div
+          className="detail-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+            gap: 12,
+          }}
+        >
+          {[
+            ["Hostname", server.hostname],
+            ["IP address", server.ip],
+            ["MAC address", server.mac],
+            ["OS", server.os],
+            ["Server type", server.type],
+            ["CPU", server.cpu],
+            ["RAM", server.ram],
+            ["Storage", server.storage],
+            ["Uptime", server.uptime],
+            ["Environment", server.environment],
+            ["Location", server.location],
+            ["Assigned administrator", server.owner],
+          ].map(([label, value]) => (
+            <div key={label}>
+              <div style={detailLabel}>
+                {label}
+                {["MAC address", "Uptime"].includes(label) && (
+                  <InfoTip
+                    text={
+                      label === "MAC address"
+                        ? "A network interface identifier used to distinguish hardware on a local network."
+                        : "How long the server has been running since its last restart."
+                    }
+                  />
+                )}
+              </div>
+              <strong>{value}</strong>
+            </div>
+          ))}
+        </div>
+      </Panel>
+      <div
+        className="server-page-grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+          gap: 14,
+          marginTop: 14,
+        }}
+      >
+        <Panel title="Health and services">
+          <div
+            style={{
+              display: "flex",
+              gap: 10,
+              alignItems: "center",
+              marginBottom: 14,
+            }}
+          >
+            <StatusBadge status={server.status} />
+            <span style={{ color: T.green, fontWeight: 700 }}>
+              {server.health}
+            </span>
+          </div>
+          <div style={detailLabel}>Installed services</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+            {server.services.map((service) => (
+              <Badge
+                key={service}
+                label={service}
+                bg="#e8f0fe"
+                color={T.blue2}
+              />
+            ))}
+          </div>
+          <div style={{ ...detailLabel, marginTop: 16 }}>
+            Backup status{" "}
+            <InfoTip text="Backups provide a recovery path after hardware failure, mistakes, or security incidents." />
+          </div>
+          <strong>{server.backup}</strong>
+        </Panel>
+        <Panel title="Recent events and logs">
+          <EventTable events={server.events || []} />
+        </Panel>
+      </div>
+    </div>
+  );
+}
+
+function PageHeading({ title, subtitle, children }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        gap: 12,
+        marginBottom: 14,
+        flexWrap: "wrap",
+      }}
+    >
+      <div>
+        <h1 style={{ margin: 0, color: T.navy, fontSize: 23 }}>{title}</h1>
+        <div style={{ color: T.textSub, marginTop: 4, fontSize: 13 }}>
+          {subtitle}
+        </div>
+      </div>
+      {children}
+    </div>
+  );
+}
+function Panel({ title, children }) {
+  return (
+    <section
+      style={{
+        background: T.surface,
+        border: `1px solid ${T.border}`,
+        boxShadow: shadow,
+        padding: 14,
+      }}
+    >
+      <h2 style={{ margin: "0 0 12px", color: T.navy, fontSize: 15 }}>
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
+}
+function Metric({ label, value, color }) {
+  return (
+    <div style={{ marginBottom: 12 }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: 12,
+        }}
+      >
+        <span>{label}</span>
+        <strong>{value}%</strong>
+      </div>
+      <div style={{ background: "#e5e7eb", height: 8, marginTop: 5 }}>
+        <div
+          style={{ width: `${value}%`, height: "100%", background: color }}
+        />
+      </div>
+    </div>
+  );
+}
+function EventTable({ events }) {
+  return (
+    <table style={tableStyle}>
+      <thead>
+        <tr>
+          {["Timestamp", "Event", "Severity"].map((heading) => (
+            <th key={heading} style={thStyle}>
+              {heading}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {events.map((event, index) => (
+          <tr key={`${event.time}-${index}`}>
+            <td style={tdStyle}>{event.time}</td>
+            <td style={tdStyle}>{event.event}</td>
+            <td style={tdStyle}>
+              <StatusBadge
+                status={event.severity === "Info" ? "Online" : event.severity}
+              />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+const pageStyle = { padding: 18, maxWidth: 1500, margin: "0 auto" };
+const topMenuStyle = {
+  position: "absolute",
+  top: "100%",
+  right: 0,
+  background: "#f5f5f5",
+  border: `1px solid ${T.border}`,
+  boxShadow: "2px 4px 14px rgba(0,0,0,0.22)",
+  zIndex: 9999,
+  padding: "4px 0",
+};
+const topMenuTitle = {
+  padding: "5px 14px 7px",
+  color: T.textSub,
+  borderBottom: `1px solid ${T.borderL}`,
+  fontSize: 11,
+  fontWeight: 800,
+  textTransform: "uppercase",
+  letterSpacing: 0.6,
+};
+const topMenuItem = {
+  width: "100%",
+  border: 0,
+  background: "transparent",
+  color: T.text,
+  padding: "8px 14px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  gap: 2,
+  textAlign: "left",
+  cursor: "pointer",
+  fontSize: 12,
+};
+const modalBackdrop = {
+  position: "fixed",
+  inset: 0,
+  background: "rgba(0,0,0,.55)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 10000,
+  padding: 16,
+};
+const modalPanel = {
+  background: T.surface,
+  width: "100%",
+  maxWidth: 650,
+  boxShadow: "0 12px 40px rgba(0,0,0,.35)",
+};
+const modalHeader = {
+  padding: "12px 16px",
+  background: T.sidebar,
+  color: "#fff",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+};
+const modalClose = {
+  background: "none",
+  border: 0,
+  color: "#fff",
+  fontSize: 22,
+  cursor: "pointer",
+};
+const formLabel = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 4,
+  color: T.textSub,
+  fontSize: 11,
+  fontWeight: 700,
+};
+const formInput = {
+  border: `1px solid ${T.border}`,
+  padding: "7px 8px",
+  background: "#fff",
+  color: T.text,
+  fontSize: 12,
+  minWidth: 0,
+};
+const propertyButton = {
+  border: `1px solid ${T.borderL}`,
+  background: "#fafbfc",
+  padding: "9px 10px",
+  display: "flex",
+  flexDirection: "column",
+  gap: 5,
+  alignItems: "flex-start",
+  textAlign: "left",
+  cursor: "pointer",
+  color: T.textSub,
+  fontSize: 11,
+};
+const summaryCard = {
+  background: T.surface,
+  border: `1px solid ${T.border}`,
+  padding: "10px 12px",
+  display: "flex",
+  flexDirection: "column",
+  gap: 4,
+};
+const tableStyle = { width: "100%", borderCollapse: "collapse", fontSize: 12 };
+const thStyle = {
+  background: T.sidebar,
+  color: "#fff",
+  textAlign: "left",
+  padding: "8px 7px",
+  whiteSpace: "nowrap",
+};
+const tdStyle = {
+  borderBottom: `1px solid ${T.borderL}`,
+  padding: "8px 7px",
+  whiteSpace: "nowrap",
+};
+const detailLabel = { color: T.textSub, fontSize: 11, marginBottom: 4 };
+const listStyle = { listStyle: "none", padding: 0, margin: 0, fontSize: 12 };
+
 // ════════════════════════════════════════════════════════
 // TOOLS DROPDOWN (matches Image 2 Tools menu exactly)
 // ════════════════════════════════════════════════════════
+function ServerManagerMenu({ menu, setTool, onClose }) {
+  const ref = useRef();
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) onClose();
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, [onClose]);
+
+  const menuItems = {
+    Manage: [
+      [
+        "Add other servers to manage",
+        "Open the shared server inventory",
+        "allsrv",
+      ],
+      [
+        "Local Server properties",
+        "Review this machine's configuration",
+        "local",
+      ],
+      ["Print Services", "Manage queues and printer drivers", "print"],
+      ["Server Manager dashboard", "Return to the overview", "servermgr"],
+    ],
+    View: [
+      ["Dashboard", "Roles, events, and quick-start actions", "servermgr"],
+      ["Local Server", "Properties and performance", "local"],
+      ["All Servers", "Inventory, filters, and server health", "allsrv"],
+      ["Event Viewer", "Inspect warnings and errors", "events"],
+    ],
+    Help: [
+      [
+        "AD DS learning workspace",
+        "Browse users, computers, and directory objects",
+        "aduc",
+      ],
+      [
+        "Event Viewer investigation guide",
+        "Practice tracing a source and event ID",
+        "events",
+      ],
+      ["Domain controller concepts", "Review replication and FSMO roles", "dc"],
+      ["About ADlapp", "Simulated training environment", null],
+    ],
+  }[menu];
+
+  return (
+    <div ref={ref} style={{ ...topMenuStyle, minWidth: 280 }}>
+      <div style={topMenuTitle}>{menu}</div>
+      {menuItems.map(([label, description, destination]) => (
+        <button
+          key={label}
+          onClick={() => {
+            if (destination) setTool(destination);
+            onClose();
+          }}
+          style={topMenuItem}
+          onMouseEnter={(event) => {
+            event.currentTarget.style.background = "#dde8f4";
+          }}
+          onMouseLeave={(event) => {
+            event.currentTarget.style.background = "transparent";
+          }}
+        >
+          <strong>{label}</strong>
+          <span>{description}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function ToolsDropdown({ setTool, onClose }) {
   const ref = useRef();
   useEffect(() => {
@@ -5548,6 +7169,14 @@ export default function App() {
   const [state, dispatch] = useReducer(adReducer, initialState);
   const [tool, setTool] = useState("servermgr");
   const [toolsOpen, setToolsOpen] = useState(false);
+  const [topMenu, setTopMenu] = useState(null);
+  const [servers, setServers] = useState(loadServers);
+  const [selectedServerId, setSelectedServerId] = useState(null);
+
+  const updateServers = useCallback((nextServers) => {
+    setServers(nextServers);
+    saveServers(nextServers);
+  }, []);
 
   const logEvent = useCallback(
     (message, level = "Information", source = "AD Manager", eventId = 5000) => {
@@ -5574,13 +7203,11 @@ export default function App() {
       id: "local",
       label: "Local Server",
       icon: "🖥",
-      action: () => alert("Local Server (simulated)"),
     },
     {
       id: "allsrv",
       label: "All Servers",
       icon: "🖧",
-      action: () => alert("All Servers (simulated)"),
     },
     { id: "aduc", label: "AD DS", icon: "🏢" },
     { id: "dns", label: "DNS", icon: "🌐" },
@@ -5596,7 +7223,6 @@ export default function App() {
       id: "print",
       label: "Print Services",
       icon: "🖨",
-      action: () => alert("Print Services (simulated)"),
     },
   ];
 
@@ -5608,6 +7234,8 @@ export default function App() {
     if (tool === "aduc") return "AD DS";
     if (tool === "events") return "Event Viewer";
     if (tool === "dc") return "Domain Controllers";
+    if (tool === "print") return "Print Services";
+    if (tool === "details") return "Server Details";
     return navItems.find((n) => n.id === tool)?.label || tool;
   })();
 
@@ -5739,24 +7367,40 @@ export default function App() {
         {/* Manage / Tools / View / Help */}
         <div style={{ display: "flex", height: "100%", position: "relative" }}>
           {["Manage", "View", "Help"].map((m) => (
-            <button
-              key={m}
-              onClick={() => alert(`${m} (simulated)`)}
-              style={{
-                background: "none",
-                border: "none",
-                borderLeft: "1px solid #3a3a3a",
-                color: "#ccc",
-                cursor: "pointer",
-                padding: "0 14px",
-                fontSize: 13,
-                height: "100%",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#333")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "none")}
-            >
-              {m}
-            </button>
+            <div key={m} style={{ position: "relative", height: "100%" }}>
+              <button
+                onClick={() => {
+                  setTopMenu((current) => (current === m ? null : m));
+                  setToolsOpen(false);
+                }}
+                style={{
+                  background: topMenu === m ? "#333" : "none",
+                  border: "none",
+                  borderLeft: "1px solid #3a3a3a",
+                  color: "#ccc",
+                  cursor: "pointer",
+                  padding: "0 14px",
+                  fontSize: 13,
+                  height: "100%",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background = "#333")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background =
+                    topMenu === m ? "#333" : "none")
+                }
+              >
+                {m} <span style={{ color: "#777", fontSize: 10 }}>▼</span>
+              </button>
+              {topMenu === m && (
+                <ServerManagerMenu
+                  menu={m}
+                  setTool={setTool}
+                  onClose={() => setTopMenu(null)}
+                />
+              )}
+            </div>
           ))}
           {/* Tools — highlighted in orange like Image 2 */}
           <div style={{ position: "relative" }}>
@@ -5943,12 +7587,43 @@ export default function App() {
           style={{
             flex: 1,
             overflow: "auto",
-            background: tool === "servermgr" ? "#efefef" : T.bg,
+            background: [
+              "servermgr",
+              "local",
+              "allsrv",
+              "details",
+              "print",
+            ].includes(tool)
+              ? "#efefef"
+              : T.bg,
           }}
         >
           {tool === "servermgr" && (
             <ServerManagerDashboard state={state} setTool={setTool} />
           )}
+          {tool === "local" && (
+            <LocalServerView servers={servers} updateServers={updateServers} />
+          )}
+          {tool === "allsrv" && (
+            <AllServersView
+              servers={servers}
+              updateServers={updateServers}
+              openDetails={(id) => {
+                setSelectedServerId(id);
+                setTool("details");
+              }}
+            />
+          )}
+          {tool === "details" &&
+            servers.find((server) => server.id === selectedServerId) && (
+              <ServerDetailsView
+                server={servers.find(
+                  (server) => server.id === selectedServerId,
+                )}
+                goBack={() => setTool("allsrv")}
+              />
+            )}
+          {tool === "print" && <PrintServicesView />}
           {tool === "aduc" && (
             <div
               style={{
