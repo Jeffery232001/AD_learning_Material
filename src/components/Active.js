@@ -5595,6 +5595,88 @@ function PrintServicesView() {
   );
 }
 
+function FileStorageView({ servers }) {
+  const fileServer = servers.find((server) => server.type === "File Server") || servers[0];
+  const storageKey = "adlapp-file-storage-state";
+  const defaultState = {
+    shares: [
+      { id: "share-public", name: "Public", path: "D:\\Shares\\Public", access: "Domain Users", status: "Online", usage: 38 },
+      { id: "share-dept", name: "Departments", path: "D:\\Shares\\Departments", access: "Department groups", status: "Online", usage: 64 },
+      { id: "share-home", name: "User Homes", path: "D:\\Shares\\User-Homes", access: "Individual users", status: "Online", usage: 51 },
+    ],
+    volumes: [
+      { id: "vol-os", name: "C:", fileSystem: "NTFS", capacity: "250 GB", free: "91 GB", usage: 64, status: "Healthy" },
+      { id: "vol-data", name: "D:", fileSystem: "ReFS", capacity: "3.5 TB", free: "1.9 TB", usage: 46, status: "Healthy" },
+      { id: "vol-backup", name: "E:", fileSystem: "NTFS", capacity: "1 TB", free: "280 GB", usage: 72, status: "Review" },
+    ],
+    quotas: [
+      { id: "quota-dept", path: "D:\\Shares\\Departments", limit: "1 TB", used: "640 GB", usage: 64 },
+      { id: "quota-home", path: "D:\\Shares\\User-Homes", limit: "500 GB", used: "255 GB", usage: 51 },
+    ],
+    deduplication: true,
+  };
+  const [storage, setStorage] = useState(() => {
+    try {
+      return JSON.parse(window.localStorage.getItem(storageKey)) || defaultState;
+    } catch (error) {
+      return defaultState;
+    }
+  });
+  const [activeTab, setActiveTab] = useState("Overview");
+  const [showShareForm, setShowShareForm] = useState(false);
+  const [shareName, setShareName] = useState("");
+  const [notice, setNotice] = useState("");
+
+  useEffect(() => {
+    window.localStorage.setItem(storageKey, JSON.stringify(storage));
+  }, [storage]);
+
+  const announce = (message) => {
+    setNotice(message);
+    window.setTimeout(() => setNotice(""), 2500);
+  };
+  const updateStorage = (next) => setStorage((current) => ({ ...current, ...next }));
+  const addShare = () => {
+    const name = shareName.trim();
+    if (!name) return;
+    updateStorage({ shares: [...storage.shares, { id: `share-${Date.now()}`, name, path: `D:\\Shares\\${name}`, access: "Domain Users", status: "Online", usage: 0 }] });
+    setShareName("");
+    setShowShareForm(false);
+    announce(`${name} share created`);
+  };
+  const toggleShare = (id) => updateStorage({ shares: storage.shares.map((share) => share.id === id ? { ...share, status: share.status === "Online" ? "Offline" : "Online" } : share) });
+  const removeShare = (id) => {
+    const share = storage.shares.find((item) => item.id === id);
+    updateStorage({ shares: storage.shares.filter((item) => item.id !== id) });
+    announce(`${share.name} share removed`);
+  };
+  const usageColor = (usage) => usage >= 80 ? T.red : usage >= 70 ? T.amber : T.green;
+
+  return (
+    <div style={pageStyle}>
+      <PageHeading title="File and Storage Services" subtitle="Manage shares, volumes, quotas, and storage health">
+        <button onClick={() => setShowShareForm(true)} style={S.btnPrimary}>＋ New share</button>
+      </PageHeading>
+      <ViewHint>
+        This workspace models the daily checks an administrator performs on a Windows file server. Changes are saved in this browser so you can practice a complete workflow.
+      </ViewHint>
+      {notice && <div role="status" style={{ background: T.greenBg, color: T.green, border: "1px solid #b9dfb9", padding: "8px 10px", marginBottom: 12, fontSize: 12 }}>{notice}</div>}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", marginBottom: 14 }}>
+        <div style={{ color: T.textSub, fontSize: 12 }}><strong style={{ color: T.navy }}>{fileServer.hostname}</strong> · {fileServer.ip} · {fileServer.os}</div>
+        <div style={{ display: "flex", gap: 6 }}>{["Overview", "Shares", "Volumes", "Quotas"].map((tab) => <button key={tab} onClick={() => setActiveTab(tab)} style={{ ...S.btnSecondary, background: activeTab === tab ? "#dbeeff" : "#f0f0f0", borderColor: activeTab === tab ? "#90c4f0" : T.border }}>{tab}</button>)}</div>
+      </div>
+      <div className="summary-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10, marginBottom: 14 }}>
+        {[["Shared folders", storage.shares.length, T.blue2], ["Healthy volumes", storage.volumes.filter((volume) => volume.status === "Healthy").length, T.green], ["Quota policies", storage.quotas.length, T.purple], ["Storage used", `${Math.round(storage.volumes.reduce((total, volume) => total + volume.usage, 0) / storage.volumes.length)}%`, T.amber]].map(([label, value, color]) => <div key={label} style={summaryCard}><span style={{ color: T.textSub, fontSize: 12 }}>{label}</span><strong style={{ color, fontSize: 24 }}>{value}</strong></div>)}
+      </div>
+      {activeTab === "Overview" && <div className="server-page-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0, 1.2fr) minmax(260px, .8fr)", gap: 14 }}><Panel title="Storage health">{storage.volumes.map((volume) => <div key={volume.id} style={{ borderBottom: `1px solid ${T.borderL}`, padding: "8px 0" }}><div style={{ display: "flex", justifyContent: "space-between", fontSize: 12 }}><strong>{volume.name} · {volume.fileSystem}</strong><StatusBadge status={volume.status === "Healthy" ? "Online" : "Warning"} /></div><div style={{ display: "flex", justifyContent: "space-between", color: T.textSub, fontSize: 11, marginTop: 5 }}><span>{volume.free} free of {volume.capacity}</span><span>{volume.usage}% used</span></div><div style={{ background: "#e5e7eb", height: 7, marginTop: 5 }}><div style={{ width: `${volume.usage}%`, height: "100%", background: usageColor(volume.usage) }} /></div></div>)}</Panel><Panel title="Server capabilities"><div style={{ color: T.textSub, fontSize: 12, marginBottom: 12 }}>Installed on {fileServer.hostname}</div>{fileServer.services.map((service) => <div key={service} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: `1px solid ${T.borderL}`, fontSize: 12 }}><span>{service}</span><StatusBadge status="Online" /></div>)}<button onClick={() => updateStorage({ deduplication: !storage.deduplication })} style={{ ...S.btnSecondary, marginTop: 12 }}>{storage.deduplication ? "Disable" : "Enable"} data deduplication</button></Panel></div>}
+      {activeTab === "Shares" && <Panel title="Shared folders"><table style={tableStyle}><thead><tr>{["Share", "Local path", "Access", "Status", "Usage", "Actions"].map((heading) => <th key={heading} style={thStyle}>{heading}</th>)}</tr></thead><tbody>{storage.shares.map((share) => <tr key={share.id}><td style={tdStyle}><strong>{share.name}</strong></td><td style={tdStyle}>{share.path}</td><td style={tdStyle}>{share.access}</td><td style={tdStyle}><StatusBadge status={share.status === "Online" ? "Online" : "Offline"} /></td><td style={tdStyle}>{share.usage}%</td><td style={tdStyle}><button onClick={() => toggleShare(share.id)} style={S.btnSecondary}>{share.status === "Online" ? "Take offline" : "Bring online"}</button> <button onClick={() => removeShare(share.id)} style={S.btnDanger}>Remove</button></td></tr>)}</tbody></table></Panel>}
+      {activeTab === "Volumes" && <Panel title="Volumes"><table style={tableStyle}><thead><tr>{["Volume", "File system", "Capacity", "Free space", "Usage", "Status"].map((heading) => <th key={heading} style={thStyle}>{heading}</th>)}</tr></thead><tbody>{storage.volumes.map((volume) => <tr key={volume.id}><td style={tdStyle}><strong>{volume.name}</strong></td><td style={tdStyle}>{volume.fileSystem}</td><td style={tdStyle}>{volume.capacity}</td><td style={tdStyle}>{volume.free}</td><td style={tdStyle}>{volume.usage}%</td><td style={tdStyle}><StatusBadge status={volume.status === "Healthy" ? "Online" : "Warning"} /></td></tr>)}</tbody></table></Panel>}
+      {activeTab === "Quotas" && <Panel title="Quota management"><div style={{ color: T.textSub, fontSize: 12, marginBottom: 10 }}>Quota thresholds help prevent one share from consuming the entire data volume.</div><table style={tableStyle}><thead><tr>{["Path", "Limit", "Used", "Usage", "Status"].map((heading) => <th key={heading} style={thStyle}>{heading}</th>)}</tr></thead><tbody>{storage.quotas.map((quota) => <tr key={quota.id}><td style={tdStyle}>{quota.path}</td><td style={tdStyle}>{quota.limit}</td><td style={tdStyle}>{quota.used}</td><td style={tdStyle}>{quota.usage}%</td><td style={tdStyle}><StatusBadge status={quota.usage >= 80 ? "Warning" : "Online"} /></td></tr>)}</tbody></table></Panel>}
+      {showShareForm && <div style={modalBackdrop}><div style={{ ...modalPanel, maxWidth: 420 }}><div style={modalHeader}><strong>Create shared folder</strong><button onClick={() => setShowShareForm(false)} style={modalClose}>×</button></div><div style={{ padding: 16 }}><label style={formLabel}>Share name<input autoFocus value={shareName} onChange={(event) => setShareName(event.target.value)} onKeyDown={(event) => event.key === "Enter" && addShare()} placeholder="e.g. Projects" style={formInput} /></label><div style={{ color: T.textSub, fontSize: 11, marginTop: 8 }}>The local path will be created under D:\\Shares.</div></div><div style={{ display: "flex", justifyContent: "flex-end", gap: 8, padding: "0 16px 16px" }}><button onClick={() => setShowShareForm(false)} style={S.btnSecondary}>Cancel</button><button onClick={addShare} style={S.btnPrimary}>Create share</button></div></div></div>}
+    </div>
+  );
+}
+
 // ════════════════════════════════════════════════════════
 // APP SHELL — Windows Server Manager look
 // ════════════════════════════════════════════════════════
@@ -7216,7 +7298,6 @@ export default function App() {
       id: "files",
       label: "File and Storage Services",
       icon: "📂",
-      action: () => alert("File and Storage Services (simulated)"),
       arrow: true,
     },
     {
@@ -7592,6 +7673,7 @@ export default function App() {
               "local",
               "allsrv",
               "details",
+              "files",
               "print",
             ].includes(tool)
               ? "#efefef"
@@ -7624,6 +7706,7 @@ export default function App() {
               />
             )}
           {tool === "print" && <PrintServicesView />}
+          {tool === "files" && <FileStorageView servers={servers} />}
           {tool === "aduc" && (
             <div
               style={{
